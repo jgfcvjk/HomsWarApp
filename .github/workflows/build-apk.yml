@@ -15,17 +15,39 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+      - name: Find prepare script
+        run: |
+          S=$(grep -l "def patch_signing" prepare_app*.py | head -n1)
+          if [ -z "$S" ]; then S=prepare_app.py; fi
+          echo "PREP=$S" >> "$GITHUB_ENV"
+          echo "using $S"
+      - name: Prepare signing key
+        env:
+          KS_B64: ${{ secrets.KS_B64 }}
+        run: |
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/homswar.keystore"
+            echo "KS_PATH=$RUNNER_TEMP/homswar.keystore" >> "$GITHUB_ENV"
+            echo "signing key ready"
+          else
+            echo "no KS_B64 secret: default debug key will be used"
+          fi
       - name: Prepare web files
-        run: python3 prepare_app.py web
+        run: python3 "$PREP" web
       - name: Create Capacitor project
         run: |
           npm init -y
           npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+          if [ -f google-services.json ]; then npm install @capacitor-firebase/authentication@6 firebase@10; fi
           npx cap init "حرب حمص" com.homswar.game --web-dir www
           npx cap add android
       - name: Patch Android project
-        run: python3 prepare_app.py android
+        env:
+          KS_PASS: ${{ secrets.KS_PASS }}
+        run: python3 "$PREP" android
       - name: Build APK
+        env:
+          KS_PASS: ${{ secrets.KS_PASS }}
         run: |
           npx cap sync android
           cd android
