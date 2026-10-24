@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "95202524655",
+    "project_id": "homswar",
+    "storage_bucket": "homswar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95202524655:android:b2e2009174a8c81f45ca1a",
+        "android_client_info": {
+          "package_name": "com.homswar.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95202524655-5k901upb00pol33frf756hckq82nms0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homswar.game",
+            "certificate_hash": "ac4143bc090f23617a18e2131734c3e82a810fa8"
+          }
+        },
+        {
+          "client_id": "95202524655-c1ec3nch0pjpbhcro9pg1b3op4p1jlms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPrEObszb2Reui6rduWmkJKg8qgA11NU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95202524655-c1ec3nch0pjpbhcro9pg1b3op4p1jlms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
